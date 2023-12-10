@@ -20,11 +20,7 @@ const Item = ({ item, width }) => {
   const {
     data: {
       0: {
-        attributes: {
-          formats: {
-            small: { url },
-          },
-        },
+        attributes: { url },
       },
     },
   } = image;
