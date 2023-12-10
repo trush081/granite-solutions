@@ -70,7 +70,7 @@ const CartMenu = () => {
                       alt={item?.name}
                       width="123px"
                       height="164px"
-                      src={`${process.env.REACT_APP_STRAPI_URL}${item?.attributes?.image?.data[0]?.attributes?.formats?.small?.url}`}
+                      src={`${item?.attributes?.image?.data[0]?.attributes?.url}`}
                     />
                   </Box>
                   <Box flex="1 1 60%">
