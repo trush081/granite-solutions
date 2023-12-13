@@ -9,6 +9,7 @@ import Payment from "./Payment";
 import Shipping from "./Shipping";
 import { loadStripe } from "@stripe/stripe-js";
 
+//Test Stripe Integration key
 const stripePromise = loadStripe(
   "pk_test_51OIPOlEInt0UOEQ6dQeO9iaCX6DH8msCN82ThwcN76nDxgMm7wGtTGbRHthr0xo8lWCn6i2qhcDNpg9a5OSufMRV00OE4Qctl1"
 );
@@ -47,8 +48,6 @@ const Checkout = () => {
         count,
       })),
     };
-
-    console.log(JSON.stringify(requestBody));
     const response = await fetch(`${process.env.REACT_APP_STRAPI_URL}/api/orders`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

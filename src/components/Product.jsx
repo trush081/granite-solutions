@@ -7,7 +7,7 @@ import { shades } from "../theme";
 import { addToCart } from "../state";
 import { useNavigate } from "react-router-dom";
 
-const Item = ({ item, width }) => {
+const Product = ({ product, width }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
@@ -16,7 +16,7 @@ const Item = ({ item, width }) => {
     palette: { neutral },
   } = useTheme();
 
-  const { category, price, name, image } = item.attributes;
+  const { category, price, name, image } = product.attributes;
   const {
     data: {
       0: {
@@ -33,11 +33,11 @@ const Item = ({ item, width }) => {
         onMouseOut={() => setIsHovered(false)}
       >
         <img
-          alt={item.name}
+          alt={product.name}
           width="300px"
           height="400px"
           src={`${url}`}
-          onClick={() => navigate(`/item/${item.id}`)}
+          onClick={() => navigate(`/product/${product.id}`)}
           style={{ cursor: "pointer" }}
         />
         <Box
@@ -65,7 +65,7 @@ const Item = ({ item, width }) => {
             </Box>
             <Button
               onClick={() => {
-                dispatch(addToCart({ item: { ...item, count } }));
+                dispatch(addToCart({ product: { ...product, count } }));
               }}
               sx={{ backgroundColor: shades.primary[300], color: "white" }}
             >
@@ -88,4 +88,4 @@ const Item = ({ item, width }) => {
   );
 };
 
-export default Item;
+export default Product;

@@ -7,13 +7,13 @@ import { shades } from "../../theme";
 
 // imports all images from assets folder
 const importAll = (r) =>
-  r.keys().reduce((acc, item) => {
-    acc[item.replace("./", "")] = r(item);
+  r.keys().reduce((acc, product) => {
+    acc[product.replace("./", "")] = r(product);
     return acc;
   }, {});
 
 export const heroTextureImports = importAll(
-  require.context("../../assets", false, /\.(png|jpe?g|svg)$/)
+  require.context("../../assets", false, /\.(png|jpg|svg|webp)$/)
 );
 
 const MainCarousel = () => {
@@ -62,12 +62,12 @@ const MainCarousel = () => {
             alt={`carousel-${index}`}
             style={{
               width: "100%",
-              height: "700px",
+              height: "350px",
               objectFit: "cover",
               backgroundAttachment: "fixed",
             }}
           />
-          <Box
+          {/* <Box
             color="white"
             padding="20px"
             borderRadius="1px"
@@ -80,7 +80,7 @@ const MainCarousel = () => {
             margin={isNonMobile ? undefined : "0 auto"}
             maxWidth={isNonMobile ? undefined : "240px"}
           >
-            <Typography color={shades.secondary[200]}>-- NEW ITEMS</Typography>
+            <Typography color={shades.secondary[200]}>-- NEW Products</Typography>
             <Typography variant="h1">Summer Sale</Typography>
             <Typography
               fontWeight="bold"
@@ -89,7 +89,7 @@ const MainCarousel = () => {
             >
               Discover More
             </Typography>
-          </Box>
+          </Box> */}
         </Box>
       ))}
     </Carousel>

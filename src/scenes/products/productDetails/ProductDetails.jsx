@@ -3,52 +3,51 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Item from "../../components/Item";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import Product from "../../../components/Product";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { shades } from "../../theme";
-import { addToCart } from "../../state";
+import { shades } from "../../../theme";
+import { addToCart } from "../../../state";
 import { useDispatch } from "react-redux";
 
-const ItemDetails = () => {
+const ProductDetails = () => {
   const dispatch = useDispatch();
-  const { itemId } = useParams();
+  const { productId } = useParams();
   const [value, setValue] = useState("description");
   const [count, setCount] = useState(1);
-  const [item, setItem] = useState(null);
-  const [items, setItems] = useState([]);
+  const [product, setProduct] = useState(null);
+  const [products, setProducts] = useState([]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  async function getItem() {
-    const item = await fetch(
-      `${process.env.REACT_APP_STRAPI_URL}/api/items/${itemId}?populate=image`,
+  async function getProduct() {
+    const product = await fetch(
+      `${process.env.REACT_APP_STRAPI_URL}/api/products/${productId}?populate=image`,
       {
         method: "GET",
       }
     );
-    const itemJson = await item.json();
-    setItem(itemJson.data);
+    const productJson = await product.json();
+    setProduct(productJson.data);
   }
 
-  async function getItems() {
-    const items = await fetch(
-      `${process.env.REACT_APP_STRAPI_URL}/api/items?populate=image`,
+  async function getProducts() {
+    const products = await fetch(
+      `${process.env.REACT_APP_STRAPI_URL}/api/products?populate=image`,
       {
         method: "GET",
       }
     );
-    const itemsJson = await items.json();
-    setItems(itemsJson.data);
+    const productsJson = await products.json();
+    setProducts(productsJson.data);
   }
 
   useEffect(() => {
-    getItem();
-    getItems();
-  }, [itemId]); // eslint-disable-line react-hooks/exhaustive-deps
+    getProduct();
+    getProducts();
+  }, [productId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Box width="80%" m="80px auto">
@@ -56,26 +55,22 @@ const ItemDetails = () => {
         {/* IMAGES */}
         <Box flex="1 1 40%" mb="40px">
           <img
-            alt={item?.name}
+            alt={product?.name}
             width="100%"
             height="100%"
-            src={`${item?.attributes?.image?.data[0]?.attributes?.url}`}
+            src={`${product?.attributes?.image?.data[0]?.attributes?.url}`}
             style={{ objectFit: "contain" }}
           />
         </Box>
 
         {/* ACTIONS */}
         <Box flex="1 1 50%" mb="40px">
-          <Box display="flex" justifyContent="space-between">
-            <Box>Home/Item</Box>
-            <Box>Prev Next</Box>
-          </Box>
 
           <Box m="65px 0 25px 0">
-            <Typography variant="h3">{item?.attributes?.name}</Typography>
-            <Typography>${item?.attributes?.price}</Typography>
+            <Typography variant="h3">{product?.attributes?.name}</Typography>
+            <Typography>${product?.attributes?.price}</Typography>
             <Typography sx={{ mt: "20px" }}>
-              {item?.attributes?.longDescription[0]?.children[0]?.text}
+              {product?.attributes?.longDescription[0]?.children[0]?.text}
             </Typography>
           </Box>
 
@@ -103,18 +98,16 @@ const ItemDetails = () => {
                 minWidth: "150px",
                 padding: "10px 40px",
               }}
-              onClick={() => dispatch(addToCart({ item: { ...item, count } }))}
+              onClick={() => dispatch(addToCart({ product: { ...product, count } }))}
             >
               ADD TO CART
             </Button>
           </Box>
 
-          <Box>
-            <Box m="20px 0 5px 0" display="flex">
-              <FavoriteBorderOutlinedIcon />
-              <Typography sx={{ ml: "5px" }}>ADD TO WISHLIST</Typography>
-            </Box>
-            <Typography>CATEGORIES: {item?.attributes?.category}</Typography>
+          <Box
+            marginTop="10px"
+          >
+            <Typography>CATEGORIES: {product?.attributes?.category}</Typography>
           </Box>
         </Box>
       </Box>
@@ -127,14 +120,14 @@ const ItemDetails = () => {
       </Box>
       <Box display="flex" flexWrap="wrap" gap="15px">
         {value === "description" && (
-          <div>{item?.attributes?.longDescription[0]?.children[0]?.text}</div>
+          <div>{product?.attributes?.longDescription[0]?.children[0]?.text}</div>
         )}
-        {value === "reviews" && <div>reviews</div>}
+        {value === "reviews" && <div>no reviews at current time</div>}
       </Box>
-      {/* RELATED ITEMS */}
+      {/* RELATED PRODUCTS */}
       <Box mt="50px" width="100%">
         <Typography variant="h3" fontWeight="bold">
-          Related Products
+          Similar Materials
         </Typography>
         <Box
           mt="20px"
@@ -143,8 +136,8 @@ const ItemDetails = () => {
           columnGap="1.33%"
           justifyContent="space-between"
         >
-          {items.slice(0, 4).map((item, i) => (
-            <Item key={`${item.name}-${i}`} item={item} />
+          {products.slice(0, 4).map((product, i) => (
+            <Product key={`${product.name}-${i}`} product={product} />
           ))}
         </Box>
       </Box>
@@ -152,4 +145,4 @@ const ItemDetails = () => {
   );
 };
 
-export default ItemDetails;
+export default ProductDetails;

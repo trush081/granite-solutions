@@ -4,13 +4,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import styled from '@emotion/styled';
-import { shades } from '../../theme';
+import { shades } from '../theme';
 import {
   decreaseCount,
   increaseCount,
   removeFromCart,
   setIsCartOpen,
-} from '../../state';
+} from '../state';
 import { useNavigate } from 'react-router-dom';
 
 const FlexBox = styled(Box)`
@@ -25,8 +25,8 @@ const CartMenu = () => {
   const cart = useSelector((state) => state.cart.cart);
   const isCartOpen = useSelector((state) => state.cart.isCartOpen);
 
-  const totalPrice = cart.reduce((total, item) => {
-    return total + item.count * item.attributes.price;
+  const totalPrice = cart.reduce((total, product) => {
+    return total + product.count * product.attributes.price;
   }, 0);
 
   return (
@@ -62,27 +62,27 @@ const CartMenu = () => {
   
           {/* CART List */}
           <Box>
-            {cart.map((item) => (
-              <Box key={`${item.attributes.name}-${item.id}`}>
+            {cart.map((product) => (
+              <Box key={`${product.attributes.name}-${product.id}`}>
                 <FlexBox p="15px 0">
                   <Box flex="1 1 40%">
                     <img
-                      alt={item?.name}
+                      alt={product?.name}
                       width="123px"
                       height="164px"
-                      src={`${item?.attributes?.image?.data[0]?.attributes?.url}`}
+                      src={`${product?.attributes?.image?.data[0]?.attributes?.url}`}
                     />
                   </Box>
                   <Box flex="1 1 60%">
                     <FlexBox mb="5px">
                       <Typography fontWeight="bold">
-                        {item.attributes.name}
+                        {product.attributes.name}
                       </Typography>
-                      <IconButton onClick={() => dispatch(removeFromCart({ id: item.id}))}>
+                      <IconButton onClick={() => dispatch(removeFromCart({ id: product.id}))}>
                         <CloseIcon />
                       </IconButton>
                     </FlexBox>
-                    <Typography>{item.attributes.shortDescription[0].children[0].text}</Typography>
+                    <Typography>{product.attributes.shortDescription[0].children[0].text}</Typography>
   
                     {/* AMOUNT */}
                     <FlexBox m="15px 0">
@@ -92,20 +92,20 @@ const CartMenu = () => {
                         border={`1.5px solid ${shades.neutral[500]}`}
                       >
                         <IconButton
-                          onClick={() => dispatch(decreaseCount({ id: item.id}))}
+                          onClick={() => dispatch(decreaseCount({ id: product.id}))}
                         >
                           <RemoveIcon />
                         </IconButton>
-                        <Typography>{item.count}</Typography>
+                        <Typography>{product.count}</Typography>
                         <IconButton
-                          onClick={() => dispatch(increaseCount({ id: item.id}))}
+                          onClick={() => dispatch(increaseCount({ id: product.id}))}
                         >
                           <AddIcon />
                         </IconButton>
                       </Box>
                       {/* PRICE */}
                       <Typography fontWeight="bold">
-                        ${item.attributes.price}
+                        ${product.attributes.price}
                       </Typography>
                     </FlexBox>
                   </Box>

@@ -10,9 +10,9 @@ const Subscribe = () => {
       <IconButton>
         <MarkEmailReadOutlinedIcon fontSize="large" />
       </IconButton>
-      <Typography variant="h3">Subscribe To Our Newsletter</Typography>
-      <Typography>
-        and receive $20 coupon for your first order when you checkout
+      <Typography variant="h3">Receive a Free Quote</Typography>
+      <Typography marginTop="5px">
+        Give us a summary of what you are looking for and we will reach out!
       </Typography>
       <Box
         p="2px 4px"
@@ -30,7 +30,7 @@ const Subscribe = () => {
         />
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
         <Typography sx={{ p: "10px", ":hover": { cursor: "pointer" } }}>
-          Subscribe
+          Submit
         </Typography>
       </Box>
     </Box>
