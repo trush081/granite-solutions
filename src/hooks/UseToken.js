@@ -5,15 +5,23 @@ export default function useToken() {
     return sessionStorage.getItem('token');
   }
 
+  const removeToken = () => {
+    return sessionStorage.removeItem('token');
+  }
+
   const [token, setToken] = useState(getToken());
 
-  const saveToken = userToken => {
-    sessionStorage.setItem('token', JSON.stringify(userToken));
+  const modifyToken = userToken => {
+    if (userToken) {
+      sessionStorage.setItem('token', JSON.stringify(userToken));
+    } else {
+      sessionStorage.removeItem('token')
+    }
     setToken(userToken);
   }
 
   return {
-    setToken: saveToken,
+    setToken: modifyToken,
     token
   }
 }

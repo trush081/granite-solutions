@@ -23,7 +23,7 @@ async function registerUser(credentials) {
     },
     body: JSON.stringify(credentials),
   })
-  .then(response => response)
+  .then(response => response.ok)
 }
 
 export default function Login({ setToken }) {

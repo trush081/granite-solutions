@@ -5,6 +5,11 @@ import useToken from "../../hooks/UseToken";
 const Account = () => {
   const { token, setToken } = useToken();
 
+  const Logout = () => {
+    setToken(null)
+    return <Login setToken={setToken} />
+  }
+
   if(!token) {
     return <Login setToken={setToken} />
   }
@@ -14,6 +19,7 @@ const Account = () => {
       <h1>
         you are logged in
       </h1>
+      <button onClick={() => Logout()}>Log Out</button>
     </div>
   )
 
