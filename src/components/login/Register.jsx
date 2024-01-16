@@ -1,38 +1,32 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Login.css';
-import Register from './Register';
 
-async function loginUser(credentials) {
- return fetch('https://granite-solutions-service.trentonrush.com/auth/login', {
+async function registerUser(credentials) {
+ fetch('https://granite-solutions-service.trentonrush.com/auth/register', {
    method: 'GET',
    headers: {
      'Content-Type': 'application/json',
-     'Authorization': `Basic ${credentials}`
-   }
- })
-   .then(data => data.headers.get('Authorization'))
+   },
+   body: JSON.stringify(credentials)
+ }).then((response) => {
+  if (response.ok) {
+    navigate("/account")
+  }})
 }
 
-export default function Login({ setToken }) {
+export default function Register() {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const token = await loginUser(
-      btoa(`${username}:${password}`)
-    );
-    setToken(token);
-  }
-
-  const redirectRegistration = () => {
-    return <Register />
+    await registerUser({username: username, password: password});
   }
 
   return(
     <div className="login-wrapper">
-      <h1>Please Log In</h1>
+      <h1>Register Here</h1>
       <form onSubmit={handleSubmit}>
         <label>
           <p>Email</p>
@@ -43,10 +37,9 @@ export default function Login({ setToken }) {
           <input type="password" onChange={e => setPassword(e.target.value)} />
         </label>
         <div>
-          <button type="submit">Login</button>
+          <button type="submit">Register</button>
         </div>
       </form>
-      <button onClick={() => redirectRegistration()}>Register</button>
     </div>
   )
 }
