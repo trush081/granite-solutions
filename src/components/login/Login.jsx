@@ -23,7 +23,7 @@ async function registerUser(credentials) {
     },
     body: JSON.stringify(credentials),
   })
-  .then(response => response.json())
+  .then(response => response)
 }
 
 export default function Login({ setToken }) {
@@ -35,8 +35,8 @@ export default function Login({ setToken }) {
     e.preventDefault();
     if (isRegistering) {
       // Call registration function
-      const token = await registerUser({ username, password });
-      setToken(token);
+      await registerUser({ username, password });
+      setRegistering(false);
     } else {
       // Call login function
       const token = await loginUser(btoa(`${username}:${password}`));
@@ -45,7 +45,7 @@ export default function Login({ setToken }) {
   }
 
   const redirectRegistration = () => {
-    setRegistering(true);
+    setRegistering(!isRegistering);
   }
 
   return (
