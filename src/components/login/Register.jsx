@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Login.css';
 
@@ -11,7 +12,7 @@ async function registerUser(credentials) {
    body: JSON.stringify(credentials)
  }).then((response) => {
   if (response.ok) {
-    navigate("/account")
+    useNavigate("/account")
   }})
 }
 
@@ -43,7 +44,3 @@ export default function Register() {
     </div>
   )
 }
-
-Login.propTypes = {
-  setToken: PropTypes.func.isRequired
-};
