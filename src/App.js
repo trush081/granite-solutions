@@ -18,6 +18,7 @@ import ProductDetails from "./scenes/products/productDetails/ProductDetails";
 import Navbar from "./global/Navbar";
 import CartMenu from "./global/CartMenu";
 import Footer from "./global/Footer";
+import Account from "./scenes/account/Account";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -31,6 +32,7 @@ const ScrollToTop = () => {
 }
 
 function App() {
+
   return <div className="app">
     <BrowserRouter>
       <Navbar />
@@ -44,6 +46,7 @@ function App() {
         <Route path="estimate" element={<Estimate />} />
         <Route path="visualizer" element={<Visualizer />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="account" element={<Account />} />
         <Route path="checkout" element={<Checkout />} />
         <Route path="checkout/success" element={<Confirmation />} />
       </Routes>

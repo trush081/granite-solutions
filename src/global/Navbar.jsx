@@ -124,6 +124,7 @@ const Navbar = () => {
             }}
           >
             <IconButton
+              onClick={() => navigate("/account")}
               sx={{ color: "black"}}
             >
               <PersonOutline />
