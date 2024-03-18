@@ -58,20 +58,20 @@ const Navbar = () => {
           margin="auto"
           display="flex"  
         >
-          <Box
+          {/* <Box
             onClick={() => navigate("/about")}
             sx={{ '&:hover': { cursor: "pointer" }}}
             marginRight="25px"
           >
             About
-          </Box>
-          <Box
+          </Box> */}
+          {/* <Box
             onClick={() => navigate("/services")}
             sx={{ '&:hover': { cursor: "pointer" }}}
             marginRight="25px"
           >
             Services
-          </Box>
+          </Box> */}
           <Box
             onClick={() => navigate("/products")}
             sx={{ '&:hover': { cursor: "pointer" }}}
@@ -79,27 +79,27 @@ const Navbar = () => {
           >
             Products
           </Box>
-          <Box
+          {/* <Box
             onClick={() => navigate("/estimate")}
             sx={{ '&:hover': { cursor: "pointer" }}}
             marginRight="25px"
           >
             Get an Estimate
-          </Box>
-          <Box
+          </Box> */}
+          {/* <Box
             onClick={() => navigate("/visualizer")}
             sx={{ '&:hover': { cursor: "pointer" }}}
             marginRight="25px"
           >
             Visualizer
-          </Box>
-          <Box
+          </Box> */}
+          {/* <Box
             onClick={() => navigate("/contact")}
             sx={{ '&:hover': { cursor: "pointer" }}}
             marginRight="25px"
           >
             Contact
-          </Box>
+          </Box> */}
         </Box>
         }
         
@@ -159,27 +159,27 @@ const Navbar = () => {
           zIndex="1"
           backgroundColor="rgba(255, 255, 255, 255)"
         >
-          <Box
+          {/* <Box
             onClick={() => navigate("/about")}
             sx={{ '&:hover': { cursor: "pointer" }}}
             margin="10px"
           >
             About
-          </Box>
-          <Box
+          </Box> */}
+          {/* <Box
             onClick={() => navigate("/services")}
             sx={{ '&:hover': { cursor: "pointer" }}}
             margin="10px"
           >
             Services
-          </Box>
-          <Box
+          </Box> */}
+          {/* <Box
             onClick={() => navigate("/products")}
             sx={{ '&:hover': { cursor: "pointer" }}}
             margin="10px"
           >
             Products
-          </Box>
+          </Box> */}
           <Box
             onClick={() => navigate("/estimate")}
             sx={{ '&:hover': { cursor: "pointer" }}}
@@ -187,20 +187,20 @@ const Navbar = () => {
           >
             Get an Estimate
           </Box>
-          <Box
+          {/* <Box
             onClick={() => navigate("/visualizer")}
             sx={{ '&:hover': { cursor: "pointer" }}}
             margin="10px"
           >
             Visualizer
-          </Box>
-          <Box
+          </Box> */}
+          {/* <Box
             onClick={() => navigate("/contact")}
             sx={{ '&:hover': { cursor: "pointer" }}}
             margin="10px"
           >
             Contact
-          </Box>
+          </Box> */}
         </Box>
         : null
         }

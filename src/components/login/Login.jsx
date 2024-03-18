@@ -3,20 +3,26 @@ import PropTypes from 'prop-types';
 import './Login.css';
 
 async function loginUser(credentials) {
-  return fetch('https://granite-solutions-service.trentonrush.com/auth/login', {
-    method: 'GET',
+  return fetch(`${process.env.BACKEND_URL}/user/login`, {
+    method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Basic ${credentials}`
-    }
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(credentials)
   })
-  .then(data => data.headers.get('Authorization'))
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Login failed');
+    }
+    return response.json();
+  })
+  .then(data => data.token);
 }
 
 async function registerUser(credentials) {
   // Implement the registration logic here
   // Example: use fetch to register a new user
-  return fetch('https://granite-solutions-service.trentonrush.com/auth/register', {
+  return fetch(`${process.env.BACKEND_URL}/user/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -39,7 +45,8 @@ export default function Login({ setToken }) {
       setRegistering(false);
     } else {
       // Call login function
-      const token = await loginUser(btoa(`${username}:${password}`));
+      const token = await loginUser({ username, password });
+      setPassword('');
       setToken(token);
     }
   }
